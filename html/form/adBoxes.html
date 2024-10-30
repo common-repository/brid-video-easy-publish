@@ -1,0 +1,505 @@
+<!-- ad box for 300x250 banner -->
+<div id="ad-box-banner-template" style="display: none">
+	<div class="brid-box-container">
+		<div id="brid-box-{{iterator}}" data-type="{{ad_type}}" data-iterator="{{iterator}}" class="brid-box-{{ad_type}}">
+			<input type="hidden" id="AdId" name="Ad[{{iterator}}][id]" value="{{id}}" />
+			<input type="hidden" id="AdAdType" placeholder="{{ad_type}} Ad Tag Url" name="Ad[{{iterator}}][adType]" value="{{ad_type_int}}" />
+			
+			<div class="ad-type-header-row">
+				<div class="ad-type-header-row-title">300x250 {{ad_type}}</div>
+				<div class="ad-type-header-row-delete brid-box-remove" data-iterator="{{iterator}}" id="brid-box-remove-{{iterator}}" data-id="{{id}}" data-type="{{ad_type}}">
+					<img src="<?php echo BRID_PLUGIN_URL; ?>/img/delete_ad.png" />
+				</div>
+			</div>
+			
+			<div id="banner-{{iterator}}-settings" class="ad-box-midroll">
+				<div>Timeout: </div>
+				<div style="margin-left: 20px;">
+					<input type="text" id="AdBannerDuration" name="Ad[{{iterator}}][overlayDuration]" value="{{overlayDuration}}" style='width:60px;height:22px;text-align:center;font-family:Arial;font-style:italic;font-size:14px;text-indent:0;'/>
+				</div>
+			</div>
+			
+			<div style="border-bottom: 1px solid #dadadb;"></div>
+			
+			<div>
+				<div class="ad-waterfall-container">
+					<div>300x250 banner code</div>
+				</div>
+				<div style="padding: 1px 10px 0 10px;">
+					<input type="text" placeholder="Paste your 300x250 banner code" id="AdAdTagUrl" name="Ad[{{iterator}}][adTagUrl]" value="{{ad_tag_url}}" maxlength="1024" />
+				</div>
+				
+				<div class="flashFalbackWarring msgAdBox">
+					Provide an 300x250 banner code from your advertising partner. 
+					<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ad box for preroll, midroll, postroll and overlay -->
+<div id="ad-box-template" style="display:none;">
+	<div class="brid-box-container">
+		<div id="brid-box-{{iterator}}" data-type="{{ad_type}}" data-iterator="{{iterator}}" class="brid-box-{{ad_type}}">
+			<input type="hidden" id="AdId" name="Ad[{{iterator}}][id]" value="{{id}}" />
+			<input type="hidden" id="AdAdType" placeholder="{{ad_type}} Ad Tag Url" name="Ad[{{iterator}}][adType]" value="{{ad_type_int}}" />
+			<div class="ad-type-header-row">
+				<div class="ad-type-header-row-title">{{ad_type}}</div>
+				<div class="ad-type-header-row-delete brid-box-remove" data-iterator="{{iterator}}" id="brid-box-remove-{{iterator}}" data-id="{{id}}" data-type="{{ad_type}}">
+					<img src="<?php echo BRID_PLUGIN_URL; ?>/img/delete_ad.png" />
+				</div>
+			</div>
+			
+			{{#if isMidroll}}
+			<div id="midroll-{{iterator}}-settings" class="ad-box-midroll">
+				<div id="1-{{iterator}}-start">Cuepoints</div>
+				<div id="1-{{iterator}}-start-at" class="ad-box-midroll-input-div">
+					<input type="text" id="AdCuepoints" placeholder="Comma separated values" name="Ad[{{iterator}}][cuepoints]" value="{{cuepoints}}" style="width: 250px; height: 28px;"/>
+				</div>
+				<div class="input select" style="margin-left: 20px;">
+					<select name="Ad[{{iterator}}][adTimeType]" id="AdAdTimeType">
+						<option value="s">Seconds</option>
+						<option value="%">Percentage</option>
+					</select>
+				</div>
+			</div>
+			{{/if}}
+			
+			{{#if isOverlay}}
+			<div id="overlay-{{iterator}}-settings" class="ad-box-midroll">
+				<div>Start At:</div>
+				<div style="margin-left: 20px;">
+					<input type="text" id="AdOverlayStartAt" name="Ad[{{iterator}}][overlayStartAt]" value="{{overlayStartAt}}" style='width:60px;height:22px;text-align:center;font-family:Arial;font-style:italic;font-size:14px;text-indent:0;'/>
+				</div>
+				<div style="margin-left: 20px;">Duration: </div>
+				<div style="margin-left: 20px;">
+					<input type="text" id="AdOverlayDuration" name="Ad[{{iterator}}][overlayDuration]" value="{{overlayDuration}}" style='width:60px;height:22px;text-align:center;font-family:Arial;font-style:italic;font-size:14px;text-indent:0;'/>
+				</div>
+			</div>
+			{{/if}}
+			
+			<div style="border-bottom: 1px solid #dadadb;"></div>
+			
+			<!-- TABS -->
+			<div style="padding: 10px;">
+				<div id="tab-container-{{iterator}}" class="tab-container">
+					<div id="mobile-{{iterator}}" class="ad-tab ad-tab-active" data-type="mobile">Desktop &amp; Mobile</div>
+					<div id="desktop-{{iterator}}" class="ad-tab ad-tab-inactive" data-type="desktop">Desktop-only</div>
+				</div>
+			</div>
+			
+			<!-- MOBILE TAGS -->
+			<div class="mobile-tags-{{iterator}}">
+				
+				<!-- PRIMARY TAG MOBILE -->
+				{{#if paid}}
+				<div class="ad-waterfall-container">
+					<div>Primary Ad Tag Url</div>
+					<div id="AdTagSecondary-mobile-{{iterator}}-1" data-open="1" class="ad-waterfall {{#unless showMobileAddWatefall}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+				</div>
+				{{/if}}
+				{{#unless paid}}
+				<div class="ad-waterfall-container" style="flex-direction: row-reverse;">
+					<a href="{{redirect_url}}" target="_blank" class="ad-waterfall-link">Upgrade for ad waterfall</a>
+				</div>
+				{{/unless}}
+				
+				
+				<div style="padding: 1px 10px 0 10px;">
+					<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="AdAdTagUrl" name="Ad[{{iterator}}][adTagUrl]" value="{{ad_tag_url}}" maxlength="1024" />
+				</div>
+				
+				<div class="flashFalbackWarring msgAdBox">
+					Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+					<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+				</div>
+				<!-- PRIMARY TAG MOBILE -->
+				
+				{{#if paid}}
+				
+				<!-- SECONDARY TAG MOBILE -->
+				<div class="ad-mobile-{{iterator}}-1 {{#if showMobileAddWatefall}} hide-ad-tag {{/if}}">
+					<div class="ad-waterfall-container">
+						<div>Secondary Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-mobile-{{iterator}}-2" data-open="2" class="ad-waterfall {{#unless showMobileAddWaterfallThird}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-mobile-{{iterator}}-1" data-close="1" class="ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="AdAdTagUrl-1" name="Ad[{{iterator}}][adTagUrlSec]" value="{{ad_tag_url_sec}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+				</div>
+				<!-- SECONDARY TAG MOBILE -->
+				
+				<!-- THIRD TAG MOBILE -->
+				<div class="ad-mobile-{{iterator}}-2 {{#if showMobileAddWaterfallThird}} hide-ad-tag {{/if}}">
+					<div class="ad-waterfall-container">
+						<div>Third Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-mobile-{{iterator}}-3" data-open="3" class="ad-waterfall {{#unless showMobileAddWaterfallFourth}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-mobile-{{iterator}}-2" data-close="2" class="ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="AdAdTagUrl-2" name="Ad[{{iterator}}][adTagUrlThird]" value="{{ad_tag_url_third}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+				</div>
+				<!-- THIRD TAG MOBILE -->
+				
+				<!-- FOURTH TAG MOBILE -->
+				<div class="ad-mobile-{{iterator}}-3 {{#if showMobileAddWaterfallFourth}} hide-ad-tag {{/if}}">
+					<div class="ad-waterfall-container">
+						<div>Fourth Ad Tag Url</div>
+						<div>
+							<div id="RemoveAdTagSecondary-mobile-{{iterator}}-3" data-close="3" class="ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="AdAdTagUrl-3" name="Ad[{{iterator}}][adTagUrlFourth]" value="{{ad_tag_url_fourth}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+				</div>
+				<!-- FOURTH TAG MOBILE -->
+				
+				{{/if}}
+				
+			</div>
+			<!-- MOBILE TAGS -->
+			
+			<!-- DESKTOP TAGS -->
+			<div class="desktop-tags-{{iterator}}" style="display: none;">
+				
+				<!-- PRIMARY TAG DESKTOP -->
+				{{#if paid}}
+				<div class="ad-waterfall-container">
+					<div>Primary Ad Tag Url</div>
+					<div id="AdTagSecondary-desktop-{{iterator}}-1" data-open="1" class="ad-waterfall {{#unless showDesktopAddWatefall}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+				</div>
+				{{/if}}
+				{{#unless paid}}
+				<div class="ad-waterfall-container" style="flex-direction: row-reverse;">
+					<a href="{{redirect_url}}" target="_blank" class="ad-waterfall-link">Upgrade for ad waterfall</a>
+				</div>
+				{{/unless}}
+				
+				<div style="padding: 1px 10px 0 10px;">
+					<input type="text" placeholder="Desktop-only Ad Tag Url" id="AdFlashAdTagUrl" name="Ad[{{iterator}}][flashAdTagUrl]" value="{{flash_ad_tag_url}}" maxlength="1024" />
+				</div>
+				
+				<div class="flashFalbackWarring msgAdBox">
+					Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+					<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+				</div>
+				<div class="flashFalbackWarring msgAdBox">
+					These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+				</div>
+				<!-- PRIMARY TAG DESKTOP -->
+				
+				{{#if paid}}
+				
+				<!-- SECONDARY TAG DESKTOP -->
+				<div class="ad-desktop-{{iterator}}-1 {{#if showDesktopAddWatefall}} hide-ad-tag {{/if}}">
+					<div class="ad-waterfall-container">
+						<div>Secondary Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-desktop-{{iterator}}-2" data-open="2" class="ad-waterfall {{#unless showDesktopAddWaterfallThird}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-desktop-{{iterator}}-1" data-close="1" class="ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop-only Ad Tag Url" id="AdFlashAdTagUrl-1" name="Ad[{{iterator}}][flashAdTagUrlSec]" value="{{flash_ad_tag_url_sec}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+					<div class="flashFalbackWarring msgAdBox">
+						These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+					</div>
+				</div>
+				<!-- SECONDARY TAG DESKTOP -->
+				
+				<!-- THIRD TAG DESKTOP -->
+				<div class="ad-desktop-{{iterator}}-2 {{#if showDesktopAddWaterfallThird}} hide-ad-tag {{/if}}">
+					<div class="ad-waterfall-container">
+						<div>Third Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-desktop-{{iterator}}-3" data-open="3" class="ad-waterfall {{#unless showDesktopAddWaterfallFourth}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-desktop-{{iterator}}-2" data-close="2" class="ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop-only Ad Tag Url" id="AdFlashAdTagUrl-2" name="Ad[{{iterator}}][flashAdTagUrlThird]" value="{{flash_ad_tag_url_third}}" maxlength="1024" />
+					</div>
+
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+					<div class="flashFalbackWarring msgAdBox">
+						These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+					</div>
+				</div>
+				<!-- THIRD TAG DESKTOP -->
+				
+				<!-- FOURTH TAG DESKTOP -->
+				<div class="ad-desktop-{{iterator}}-3 {{#if showDesktopAddWaterfallFourth}} hide-ad-tag {{/if}}">
+					<div class="ad-waterfall-container">
+						<div>Fourth Ad Tag Url</div>
+						<div>
+							<div id="RemoveAdTagSecondary-desktop-{{iterator}}-3" data-close="3" class="ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop-only Ad Tag Url" id="AdFlashAdTagUrl-3" name="Ad[{{iterator}}][flashAdTagUrlFourth]" value="{{flash_ad_tag_url_fourth}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+					<div class="flashFalbackWarring msgAdBox">
+						These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+					</div>
+				</div>
+				<!-- FOURTH TAG DESKTOP -->
+				
+				{{/if}}
+			</div>
+			<!-- DESKTOP TAGS -->
+		</div>
+	</div>
+</div>
+
+
+<!-- pre-roll for ad unit -->
+<div id="unit-pre-roll-template" style="display: none;">
+	<div class="brid-box-container">
+		<div id="unit-brid-box-{{iterator}}" data-type="{{ad_type}}" data-iterator="{{iterator}}" class="unit-brid-box-{{ad_type}}">
+			<input type="hidden" id="UnitAdId" name="unitAd[{{iterator}}][id]" value="{{id}}" />
+			<input type="hidden" id="UnitAdAdType" placeholder="{{ad_type}} Ad Tag Url" name="unitAd[{{iterator}}][adType]" value="{{ad_type_int}}" />
+			<div class="ad-type-header-row">
+				<div class="ad-type-header-row-title">{{ad_type}}</div>
+				<div class="ad-type-header-row-delete unit-brid-box-remove" data-iterator="{{iterator}}" id="unit-brid-box-remove-{{iterator}}" data-id="{{id}}" data-type="{{ad_type}}">
+					<img src="<?php echo BRID_PLUGIN_URL; ?>/img/delete_ad.png" />
+				</div>
+			</div>
+			
+			<div style="border-bottom: 1px solid #dadadb;"></div>
+			
+			<!-- TABS -->
+			<div style="padding: 10px;">
+				<div id="unit-tab-container-{{iterator}}" class="tab-container">
+					<div id="unit-mobile-{{iterator}}" class="unit-ad-tab ad-tab-active" data-type="mobile">Desktop &amp; Mobile</div>
+					<div id="unit-desktop-{{iterator}}" class="unit-ad-tab ad-tab-inactive" data-type="desktop">Desktop-only</div>
+				</div>
+			</div>
+			
+			<!-- MOBILE TAGS -->
+			<div class="ad-unit-mobile-tags">
+			
+				<!-- PRIMARY TAG MOBILE -->
+				<div class="unit-ad-waterfall-container">
+					<div>Primary Ad Tag Url</div>
+					<div id="AdTagSecondary-unit-mobile-{{iterator}}-1" data-open="1" class="unit-ad-waterfall {{#unless showMobileAddWatefall}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+				</div>
+				
+				<div style="padding: 1px 10px 0 10px;">
+					<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="UnitAdAdTagUrl" name="unitAd[{{iterator}}][adTagUrl]" value="{{ad_tag_url}}" maxlength="1024" />
+				</div>
+				
+				<div class="flashFalbackWarring msgAdBox">
+					Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+					<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+				</div>
+				<!-- PRIMARY TAG MOBILE -->
+				
+				<!-- SECONDARY TAG MOBILE -->
+				<div class="unit-ad-mobile-1 {{#if showMobileAddWatefall}} hide-ad-tag {{/if}}">
+					<div class="unit-ad-waterfall-container">
+						<div>Secondary Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-unit-mobile-{{iterator}}-2" data-open="2" class="unit-ad-waterfall {{#unless showMobileAddWaterfallThird}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-unit-mobile-{{iterator}}-1" data-close="1" class="unit-ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="UnitAdAdTagUrl-1" name="unitAd[{{iterator}}][adTagUrlSec]" value="{{ad_tag_url_sec}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+				</div>
+				<!-- SECONDARY TAG MOBILE -->
+				
+				<!-- THIRD TAG MOBILE -->
+				<div class="unit-ad-mobile-2 {{#if showMobileAddWaterfallThird}} hide-ad-tag {{/if}}">
+					<div class="unit-ad-waterfall-container">
+						<div>Third Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-unit-mobile-{{iterator}}-3" data-open="3" class="unit-ad-waterfall {{#unless showMobileAddWaterfallFourth}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-unit-mobile-{{iterator}}-2" data-close="2" class="unit-ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="UnitAdAdTagUrl-2" name="unitAd[{{iterator}}][adTagUrlThird]" value="{{ad_tag_url_third}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+				</div>
+				<!-- THIRD TAG MOBILE -->
+				
+				<!-- FOURTH TAG MOBILE -->
+				<div class="unit-ad-mobile-3 {{#if showMobileAddWaterfallFourth}} hide-ad-tag {{/if}}">
+					<div class="unit-ad-waterfall-container">
+						<div>Fourth Ad Tag Url</div>
+						<div>
+							<div id="RemoveAdTagSecondary-unit-mobile-{{iterator}}-3" data-close="3" class="unit-ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop & Mobile Ad Tag Url" id="UnitAdAdTagUrl-3" name="unitAd[{{iterator}}][adTagUrlFourth]" value="{{ad_tag_url_fourth}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+				</div>
+				<!-- FOURTH TAG MOBILE -->
+			
+			</div>
+			<!-- MOBILE TAGS -->
+			
+			
+			<!-- DESKTOP TAGS -->
+			<div class="ad-unit-desktop-tags" style="display: none;">
+				
+				<!-- PRIMARY TAG DESKTOP -->
+				<div class="unit-ad-waterfall-container">
+					<div>Primary Ad Tag Url</div>
+					<div id="AdTagSecondary-unit-desktop-{{iterator}}-1" data-open="1" class="unit-ad-waterfall {{#unless showDesktopAddWatefall}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+				</div>
+				
+				<div style="padding: 1px 10px 0 10px;">
+					<input type="text" placeholder="Desktop-only Ad Tag Url" id="UnitAdFlashAdTagUrl" name="unitAd[{{iterator}}][flashAdTagUrl]" value="{{flash_ad_tag_url}}" maxlength="1024" />
+				</div>
+				
+				<div class="flashFalbackWarring msgAdBox">
+					Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+					<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+				</div>
+				<div class="flashFalbackWarring msgAdBox">
+					These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+				</div>
+				<!-- PRIMARY TAG DESKTOP -->
+				
+				<!-- SECONDARY TAG DESKTOP -->
+				<div class="unit-ad-desktop-1 {{#if showDesktopAddWatefall}} hide-ad-tag {{/if}}">
+					<div class="unit-ad-waterfall-container">
+						<div>Secondary Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-unit-desktop-{{iterator}}-2" data-open="2" class="unit-ad-waterfall {{#unless showDesktopAddWaterfallThird}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-unit-desktop-{{iterator}}-1" data-close="1" class="unit-ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop-only Ad Tag Url" id="UnitAdFlashAdTagUrl-1" name="unitAd[{{iterator}}][flashAdTagUrlSec]" value="{{flash_ad_tag_url_sec}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+					<div class="flashFalbackWarring msgAdBox">
+						These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+					</div>
+				</div>
+				<!-- SECONDARY TAG DESKTOP -->
+				
+				<!-- THIRD TAG DESKTOP -->
+				<div class="unit-ad-desktop-2 {{#if showDesktopAddWaterfallThird}} hide-ad-tag {{/if}}">
+					<div class="unit-ad-waterfall-container">
+						<div>Third Ad Tag Url</div>
+						<div>
+							<div id="AdTagSecondary-unit-desktop-{{iterator}}-3" data-open="3" class="unit-ad-waterfall {{#unless showDesktopAddWaterfallFourth}} hide-ad-tag {{/unless}}">+ Add waterfall</div>
+							<div id="RemoveAdTagSecondary-unit-desktop-{{iterator}}-2" data-close="2" class="unit-ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop-only Ad Tag Url" id="UnitAdFlashAdTagUrl-2" name="unitAd[{{iterator}}][flashAdTagUrlThird]" value="{{flash_ad_tag_url_third}}" maxlength="1024" />
+					</div>
+
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+					<div class="flashFalbackWarring msgAdBox">
+						These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+					</div>
+				</div>
+				<!-- THIRD TAG DESKTOP -->
+				
+				<!-- FOURTH TAG DESKTOP -->
+				<div class="unit-ad-desktop-3 {{#if showDesktopAddWaterfallFourth}} hide-ad-tag {{/if}}">
+					<div class="unit-ad-waterfall-container">
+						<div>Fourth Ad Tag Url</div>
+						<div>
+							<div id="RemoveAdTagSecondary-unit-desktop-{{iterator}}-3" data-close="3" class="unit-ad-waterfall-remove">- Remove Ad Tag</div>
+						</div>
+					</div>
+					
+					<div style="padding: 1px 10px 0 10px;">
+						<input type="text" placeholder="Desktop-only Ad Tag Url" id="UnitAdFlashAdTagUrl-3" name="unitAd[{{iterator}}][flashAdTagUrlFourth]" value="{{flash_ad_tag_url_fourth}}" maxlength="1024" />
+					</div>
+					
+					<div class="flashFalbackWarring msgAdBox">
+						Provide an Ad Tag URL <a href="https://brid.zendesk.com/hc/en-us/articles/200294282" target="_blank">(VAST compatible)</a> from your advertising partner. 
+						<a href="https://brid.zendesk.com/hc/en-us/sections/200105421" target="_blank">Learn more</a>.
+					</div>
+					<div class="flashFalbackWarring msgAdBox">
+						These AdTags will be forced to play on Desktop. If left empty Mobile AdTags will be used for both Mobile &amp; Desktop devices.
+					</div>
+				</div>
+				<!-- FOURTH TAG DESKTOP -->
+				
+			</div>
+			<!-- DESKTOP TAGS -->
+			
+		</div>
+		
+	</div>
+</div>
